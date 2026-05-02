@@ -1,0 +1,13 @@
+guide_home:
+    path: /
+    controller: App\Controller\GuideController::index
+
+guide_cities:
+    path: /api/cities
+    controller: App\Controller\GuideController::apiCities
+    methods: [GET]
+
+guide_city:
+    path: /api/cities/{slug}
+    controller: App\Controller\GuideController::apiCity
+    methods: [GET]
