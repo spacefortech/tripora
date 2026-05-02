@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{% block locale %}it{% endblock %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MyTravelGuide Germany{% endblock %}</title>
+    <meta name="description" content="{% block description %}Scopri attrazioni, ristoranti, locali e luoghi unici nelle principali città tedesche.{% endblock %}">
+    {% block stylesheets %}
+        <link rel="preload" href="/assets/city-discovery-hero.png" as="image">
+        <link rel="stylesheet" href="/assets/app.css">
+    {% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+
+    {% block javascripts %}
+        <script src="/assets/app.js" defer></script>
+    {% endblock %}
+</body>
+</html>

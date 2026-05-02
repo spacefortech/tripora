@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class GuideController
+class GuideController extends AbstractController
 {
     public function index(): Response
     {
@@ -14,102 +15,9 @@ class GuideController
             JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
         );
 
-        $html = <<<HTML
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyTravelGuide Germany</title>
-    <meta name="description" content="Scopri attrazioni, ristoranti, locali e luoghi unici nelle principali città tedesche.">
-    <link rel="preload" href="/assets/city-discovery-hero.png" as="image">
-    <link rel="stylesheet" href="/assets/app.css">
-</head>
-<body>
-    <div class="top-line" aria-hidden="true"></div>
-    <header class="site-header">
-        <div class="nav-inner" aria-label="Navigazione principale">
-            <a class="brand" href="/" aria-label="MyTravelGuide Germany">
-                <span class="brand-spark" aria-hidden="true">m</span>
-                <span class="brand-text">MYTRAVEL<br>GUIDE</span>
-            </a>
-            <nav class="main-nav" aria-label="Sezioni">
-                <a href="#places">Città cool</a>
-                <a href="#cities">Destinazioni</a>
-                <a href="#weekend">Weekend</a>
-                <a href="/api/cities">API</a>
-            </nav>
-            <form class="mini-search" data-mini-search autocomplete="off">
-                <label class="sr-only" for="mini-city-input">Cerca città</label>
-                <input id="mini-city-input" type="search" placeholder="Cerca...">
-                <button type="submit" aria-label="Cerca">
-                    <span aria-hidden="true">&#9906;</span>
-                </button>
-            </form>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="hero-card">
-                <div class="orange-route route-one" aria-hidden="true"></div>
-                <div class="orange-route route-two" aria-hidden="true"></div>
-                <div class="hero-shade" aria-hidden="true"></div>
-                <div class="hero-content">
-                    <h1 id="hero-title">Trova posti davvero cool in Germania.</h1>
-                    <form class="search-panel" data-city-search autocomplete="off">
-                        <div class="search-tabs" aria-label="Tipi di ricerca">
-                            <button class="is-active" type="button"><span aria-hidden="true">&#9906;</span> Città</button>
-                            <button type="button"><span aria-hidden="true">&#127860;</span> Food</button>
-                            <button type="button"><span aria-hidden="true">&#9835;</span> Locali</button>
-                        </div>
-                        <div class="search-fields">
-                            <label>
-                                <span>Dove vuoi andare?</span>
-                                <input id="city-input" name="city" list="city-options" type="search" placeholder="Es. Berlino" data-city-input>
-                            </label>
-                            <datalist id="city-options"></datalist>
-                            <button type="submit">Scoprire</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <section class="feed-shell">
-            <div class="category-row" aria-label="Filtri">
-                <button class="is-active" type="button" data-category-filter="all">&#9734; Nuovi luoghi</button>
-                <button type="button" data-category-filter="Icona">Icone</button>
-                <button type="button" data-category-filter="Cultura">Cultura</button>
-                <button type="button" data-category-filter="Food">Food</button>
-                <button type="button" data-category-filter="Locale">Locali</button>
-                <button type="button" data-category-filter="Unico">Unici</button>
-            </div>
-
-            <section class="city-strip" id="cities" aria-label="Città principali" data-city-strip></section>
-
-            <section class="results-shell" id="places" aria-live="polite">
-                <div class="section-heading">
-                    <h2 data-results-heading>Nuovi luoghi</h2>
-                    <p data-results-copy>Scopri una selezione curata di posti da visitare, mangiare e vivere in città.</p>
-                </div>
-                <div data-city-result></div>
-            </section>
-        </section>
-    </main>
-
-    <footer class="site-footer" id="weekend">
-        <span>MyTravelGuide Germany</span>
-        <span>Primo prototipo con dati curati per le principali città tedesche.</span>
-    </footer>
-
-    <script>window.CITY_GUIDE_DATA = {$citiesJson};</script>
-    <script src="/assets/app.js" defer></script>
-</body>
-</html>
-HTML;
-
-        return new Response($html);
+        return $this->render('guide/index.html.twig', array(
+            'citiesJson' => $citiesJson,
+        ));
     }
 
     public function apiCities(): JsonResponse
