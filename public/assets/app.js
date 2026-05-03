@@ -187,7 +187,7 @@
         copy.textContent = city.summary;
         activateCity(city.slug);
 
-        var places = spots.map(function (spot) {
+        var placeCards = spots.map(function (spot) {
             return '<article class="place-card">' +
                 '<div class="place-photo">' +
                     '<span class="place-label">' + escapeHtml(spot.type) + '</span>' +
@@ -198,6 +198,7 @@
                 '<div class="place-foot">Bereich: ' + escapeHtml(spot.area) + '</div>' +
             '</article>';
         }).join('');
+        var places = placeCards ? placeCards + placeCards : '';
 
         if (!places) {
             places = '<div class="empty-state"><strong>Keine Ergebnisse in diesem Filter.</strong><p>W\u00e4hle eine andere Kategorie oder kehre zu Neue Orte zur\u00fcck.</p></div>';

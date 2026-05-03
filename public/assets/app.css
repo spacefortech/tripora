@@ -110,7 +110,7 @@ input {
     width: 38px;
     height: 30px;
     border-radius: 7px;
-    background: #39ead7;
+    background: var(--orange);
     color: var(--navy);
     font-size: 2rem;
     font-weight: 900;
@@ -159,6 +159,41 @@ input {
     font-size: 0.9rem;
     font-weight: 900;
     white-space: nowrap;
+}
+
+.nav-action.has-icon {
+    gap: 8px;
+}
+
+.nav-login-icon {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+}
+
+.nav-login-icon:before,
+.nav-login-icon:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    border: 2px solid currentColor;
+    transform: translateX(-50%);
+}
+
+.nav-login-icon:before {
+    top: 1px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.nav-login-icon:after {
+    bottom: 1px;
+    width: 12px;
+    height: 7px;
+    border-radius: 999px 999px 0 0;
+    border-bottom: 0;
 }
 
 .nav-action.is-filled {
@@ -363,7 +398,7 @@ h1 {
     height: 48px;
     border: 0;
     border-radius: 999px;
-    background: #39ead7;
+    background: var(--orange);
     color: var(--navy);
     font-size: 1rem;
     font-weight: 900;
