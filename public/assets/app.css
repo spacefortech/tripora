@@ -752,7 +752,7 @@ h1 {
 
 .places-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 22px 24px;
 }
 
@@ -895,23 +895,19 @@ h1 {
     color: #fff;
 }
 
-.place-card:nth-child(5n+1) .place-photo {
+.place-card:nth-child(4n+1) .place-photo {
     background-position: 18% center;
 }
 
-.place-card:nth-child(5n+2) .place-photo {
+.place-card:nth-child(4n+2) .place-photo {
     background-position: 42% center;
 }
 
-.place-card:nth-child(5n+3) .place-photo {
+.place-card:nth-child(4n+3) .place-photo {
     background-position: 64% center;
 }
 
-.place-card:nth-child(5n+4) .place-photo {
-    background-position: 78% center;
-}
-
-.place-card:nth-child(5n) .place-photo {
+.place-card:nth-child(4n) .place-photo {
     background-position: 92% center;
 }
 

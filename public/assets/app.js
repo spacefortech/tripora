@@ -26,7 +26,7 @@
             .trim()
             .toLowerCase()
             .replace(/[äöüß]/g, function (match) {
-                return replacements[match] || match;
+                return  [match] || match;
             })
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
@@ -187,7 +187,15 @@
         copy.textContent = city.summary;
         activateCity(city.slug);
 
-        var placeCards = spots.map(function (spot) {
+        var visibleSpots = [];
+
+        if (spots.length) {
+            for (var i = 0; i < 12; i += 1) {
+                visibleSpots.push(spots[i % spots.length]);
+            }
+        }
+
+        var places = visibleSpots.map(function (spot) {
             return '<article class="place-card">' +
                 '<div class="place-photo">' +
                     '<span class="place-label">' + escapeHtml(spot.type) + '</span>' +
@@ -198,7 +206,6 @@
                 '<div class="place-foot">Bereich: ' + escapeHtml(spot.area) + '</div>' +
             '</article>';
         }).join('');
-        var places = placeCards ? placeCards + placeCards : '';
 
         if (!places) {
             places = '<div class="empty-state"><strong>Keine Ergebnisse in diesem Filter.</strong><p>W\u00e4hle eine andere Kategorie oder kehre zu Neue Orte zur\u00fcck.</p></div>';
