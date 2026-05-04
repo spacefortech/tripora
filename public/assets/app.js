@@ -10,7 +10,6 @@
     var miniSearch = document.querySelector('[data-mini-search]');
     var miniInput = document.getElementById('mini-city-input');
     var categoryButtons = document.querySelectorAll('[data-category-filter]');
-    var activeCategory = 'all';
     var activeOptionIndex = 0;
     var visibleOptions = [];
 
@@ -26,7 +25,7 @@
             .trim()
             .toLowerCase()
             .replace(/[äöüß]/g, function (match) {
-                return  [match] || match;
+                return replacements[match] || match;
             })
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
@@ -38,6 +37,24 @@
         var node = document.createElement('span');
         node.textContent = value;
         return node.innerHTML;
+    }
+
+    function setSearchCity(city) {
+        input.value = city ? city.displayName : '';
+        if (miniInput) {
+            miniInput.value = city ? city.displayName : '';
+        }
+    }
+
+    function getSpritePosition(city, fallbackIndex) {
+        var imageIndex = typeof city.imageIndex === 'number' ? city.imageIndex : fallbackIndex;
+        var column = imageIndex % 4;
+        var row = Math.floor(imageIndex / 4);
+
+        return {
+            x: column === 3 ? 100 : column * 33.3333,
+            y: row === 3 ? 100 : row * 33.3333
+        };
     }
 
     function findCity(value) {
@@ -75,7 +92,7 @@
 
     function activateCity(slug) {
         var activeSlug = slug || '';
-        var selectors = ['[data-city-button]', '[data-city-card]'];
+        var selectors = ['[data-city-button]', '[data-city-card]', '[data-destination-card]'];
 
         selectors.forEach(function (selector) {
             var nodes = document.querySelectorAll(selector);
@@ -140,10 +157,7 @@
             return;
         }
 
-        input.value = city.displayName;
-        if (miniInput) {
-            miniInput.value = city.displayName;
-        }
+        setSearchCity(city);
         renderCity(city);
         closeOptions();
     }
@@ -162,7 +176,7 @@
             card.addEventListener('click', function () {
                 var city = findCity(card.getAttribute('data-city-slug'));
                 if (city) {
-                    input.value = city.displayName;
+                    setSearchCity(city);
                     renderCity(city);
                     document.getElementById('places').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
@@ -170,80 +184,89 @@
         });
     }
 
+    function renderDestinationCard(city, index, activeSlug) {
+        var position = getSpritePosition(city, index);
+        var isActive = city.slug === activeSlug;
+        var neighborhoods = (city.neighborhoods || []).slice(0, 2).join(' / ');
+
+        return '<a class="destination-card' + (isActive ? ' is-active' : '') + '" href="?city=' + encodeURIComponent(city.slug) + '" data-destination-card data-city-slug="' + escapeHtml(city.slug) + '" aria-label="City Guide ' + escapeHtml(city.displayName) + ' ansehen" style="--sprite-x: ' + position.x + '%; --sprite-y: ' + position.y + '%; --city-accent: ' + escapeHtml(city.accent || '#ff7a1a') + ';">' +
+            '<span class="destination-photo" aria-hidden="true"></span>' +
+            '<span class="destination-shade" aria-hidden="true"></span>' +
+            '<span class="destination-content">' +
+                '<span class="destination-top">' +
+                    '<span class="destination-kicker">' + escapeHtml(city.region) + '</span>' +
+                    '<span class="destination-duration">' + escapeHtml(city.duration) + '</span>' +
+                '</span>' +
+                '<span class="destination-copy">' +
+                    '<span class="destination-neighborhoods">' + escapeHtml(neighborhoods) + '</span>' +
+                    '<strong>' + escapeHtml(city.displayName) + '</strong>' +
+                    '<span class="destination-description">' + escapeHtml(city.bestFor) + '</span>' +
+                    '<span class="destination-action">Guide ansehen</span>' +
+                '</span>' +
+            '</span>' +
+        '</a>';
+    }
+
+    function bindDestinationCards() {
+        var destinationCards = result.querySelectorAll('[data-destination-card]');
+
+        destinationCards.forEach(function (card) {
+            card.addEventListener('click', function (event) {
+                var city = findCity(card.getAttribute('data-city-slug'));
+
+                if (!city) {
+                    return;
+                }
+
+                event.preventDefault();
+                setSearchCity(city);
+                renderCity(city);
+            });
+        });
+    }
+
+    function renderDestinationGrid(activeCity, notice) {
+        var activeSlug = activeCity ? activeCity.slug : '';
+        var destinationCards = cities.slice(0, 16).map(function (city, index) {
+            return renderDestinationCard(city, index, activeSlug);
+        }).join('');
+
+        heading.textContent = notice ? 'Stadt nicht gefunden' : 'Städte für deine nächste Reise';
+        copy.textContent = notice || 'Sechzehn kuratierte City-Trips in Deutschland, mit starken Motiven, klaren Reisethemen und genug Inspiration für dein nächstes Wochenende.';
+        activateCity(activeSlug);
+        result.innerHTML = (notice ? '<div class="empty-state"><strong>Keine passende Stadt gefunden.</strong><p>Wähle eine der kuratierten Städte unten oder suche nach einer anderen Schreibweise.</p></div>' : '') +
+            '<div class="destinations-grid">' + destinationCards + '</div>';
+        bindDestinationCards();
+    }
+
     function renderCity(city) {
-        if (!city) {
-            heading.textContent = 'Stadt nicht gefunden';
-            copy.textContent = 'Versuche Berlin, Hamburg, M\u00fcnchen, K\u00f6ln, Frankfurt oder Dresden.';
-            result.innerHTML = '<div class="empty-state"><strong>Keine Stadt gefunden.</strong><p>Versuche Berlin, Hamburg, M\u00fcnchen, K\u00f6ln, Frankfurt oder Dresden.</p></div>';
-            activateCity('');
+        renderDestinationGrid(city || null, '');
+
+        if (city) {
+            window.history.replaceState({}, '', '?city=' + encodeURIComponent(city.slug));
             return;
         }
 
-        var spots = city.spots.filter(function (spot) {
-            return activeCategory === 'all' || spot.type === activeCategory;
-        });
-
-        heading.textContent = 'Neue Orte in ' + city.displayName;
-        copy.textContent = city.summary;
-        activateCity(city.slug);
-
-        var visibleSpots = [];
-
-        if (spots.length) {
-            for (var i = 0; i < 12; i += 1) {
-                visibleSpots.push(spots[i % spots.length]);
-            }
-        }
-
-        var places = visibleSpots.map(function (spot) {
-            return '<article class="place-card">' +
-                '<div class="place-photo">' +
-                    '<span class="place-label">' + escapeHtml(spot.type) + '</span>' +
-                    '<span class="time-badge">' + escapeHtml(spot.time) + '</span>' +
-                '</div>' +
-                '<h3>' + escapeHtml(spot.name) + '</h3>' +
-                '<p>' + escapeHtml(spot.note) + '</p>' +
-                '<div class="place-foot">Bereich: ' + escapeHtml(spot.area) + '</div>' +
-            '</article>';
-        }).join('');
-
-        if (!places) {
-            places = '<div class="empty-state"><strong>Keine Ergebnisse in diesem Filter.</strong><p>W\u00e4hle eine andere Kategorie oder kehre zu Neue Orte zur\u00fcck.</p></div>';
-        }
-
-        var route = city.route.map(function (item) {
-            return '<article class="route-card">' +
-                '<span>' + escapeHtml(item.step) + '</span>' +
-                '<div>' +
-                    '<h4>' + escapeHtml(item.title) + '</h4>' +
-                    '<p>' + escapeHtml(item.detail) + '</p>' +
-                '</div>' +
-            '</article>';
-        }).join('');
-
-        result.innerHTML = '<div class="city-summary">' +
-            '<div>' +
-                '<h3>' + escapeHtml(city.headline) + '</h3>' +
-                '<p>' + escapeHtml(city.bestFor) + '</p>' +
-            '</div>' +
-            '<span class="summary-badge">' + escapeHtml(city.duration) + '</span>' +
-        '</div>' +
-        '<div class="places-grid">' + places + '</div>' +
-        '<section class="route-panel" aria-label="Empfohlene Route">' +
-            '<h3>Ein typischer Tag</h3>' +
-            '<div class="route-list">' + route + '</div>' +
-        '</section>';
-
-        window.history.replaceState({}, '', '?city=' + encodeURIComponent(city.slug));
+        window.history.replaceState({}, '', window.location.pathname);
     }
 
     function searchFrom(value, scroll) {
+        var normalized = normalize(value);
         var city = findCity(value);
-        input.value = city ? city.displayName : value;
-        if (miniInput) {
-            miniInput.value = city ? city.displayName : value;
+
+        if (!normalized) {
+            setSearchCity(null);
+            renderCity(null);
+        } else if (city) {
+            setSearchCity(city);
+            renderCity(city);
+        } else {
+            input.value = value;
+            if (miniInput) {
+                miniInput.value = value;
+            }
+            renderDestinationGrid(null, 'Versuche Berlin, Hamburg, München, Köln, Frankfurt, Dresden, Leipzig, Stuttgart, Nürnberg, Heidelberg, Bremen, Düsseldorf, Duisburg, Bonn, Münster oder Rostock.');
         }
-        renderCity(city);
 
         if (scroll) {
             document.getElementById('places').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -294,8 +317,7 @@
                     node.classList.remove('is-active');
                 });
                 button.classList.add('is-active');
-                activeCategory = button.getAttribute('data-category-filter');
-                renderCity(findCity(input.value) || cities[0]);
+                renderCity(findCity(input.value));
             });
         });
     }
@@ -310,11 +332,8 @@
         bindCategoryFilters();
 
         var params = new URLSearchParams(window.location.search);
-        var initialCity = findCity(params.get('city')) || cities[0];
-        input.value = initialCity.displayName;
-        if (miniInput) {
-            miniInput.value = initialCity.displayName;
-        }
+        var initialCity = findCity(params.get('city'));
+        setSearchCity(null);
         renderCity(initialCity);
 
         cityOptions.addEventListener('click', function (event) {
