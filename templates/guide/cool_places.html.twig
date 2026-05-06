@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tripora - Cool Places in Duisburg{% endblock %}
+{% block description %}Cool Places in Duisburg: Orte, Fotos, Infos und Feedbacks für ausgewählte Highlights der Stadt.{% endblock %}
+
+{% block body %}
+    <div class="places-page">
+        <header class="site-header">
+            <div class="nav-inner" aria-label="Hauptnavigation">
+                <a class="brand" href="/" aria-label="Tripora">
+                    <span class="brand-spark" aria-hidden="true">T</span>
+                    <span class="brand-text">
+                        <strong>TRIPORA</strong>
+                        <small>City routes</small>
+                    </span>
+                </a>
+                <nav class="main-nav" aria-label="Bereiche">
+                    <a href="/">Home</a>
+                    <a href="#place-cards">Orte</a>
+                    <a href="#place-gallery">Fotos</a>
+                    <a href="#place-feedback">Feedbacks</a>
+                    <a href="/api/cities">API</a>
+                </nav>
+                <div class="nav-actions" aria-label="Schnellzugriff">
+                    <a class="nav-action is-filled" href="#place-cards">Duisburg</a>
+                    <a class="nav-action is-outline has-icon" href="/">
+                        <span class="nav-login-icon" aria-hidden="true"></span>
+                        <span>Anmelden</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="place-detail-shell" id="place-cards" aria-labelledby="place-cards-title">
+                <div class="place-detail-heading">
+                    <h1 id="place-cards-title" style="margin-top: 50px">Duisburg entdecken.</h1>
+                    <p>Wähle einen Ort aus, blättere durch die Fotos, lies die wichtigsten Infos und hinterlasse dein Feedback.</p>
+                </div>
+
+                <div class="place-card-rail" data-place-cards aria-label="Coole Orte in Duisburg"></div>
+
+                <div id="place-gallery" data-place-carousel></div>
+                <div data-place-info></div>
+                <div id="place-feedback" data-place-feedback></div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <span>Tripora</span>
+            <span>Cool Places in Duisburg, bereit für echte Daten aus dem DB.</span>
+        </footer>
+    </div>
+
+    <script>window.COOL_PLACES_DATA = {{ coolPlacesJson|raw }};</script>
+{% endblock %}

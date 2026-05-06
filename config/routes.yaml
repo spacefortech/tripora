@@ -2,6 +2,10 @@ guide_home:
     path: /
     controller: App\Controller\GuideController::index
 
+guide_cool_places:
+    path: /cool-places
+    controller: App\Controller\GuideController::coolPlaces
+
 guide_cities:
     path: /api/cities
     controller: App\Controller\GuideController::apiCities

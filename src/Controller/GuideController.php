@@ -10,13 +10,17 @@ class GuideController extends AbstractController
 {
     public function index(): Response
     {
-        $citiesJson = json_encode(
-            array_values($this->getCities()),
-            JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
-        );
+        $citiesJson = $this->encodeJson(array_values($this->getCities()));
 
         return $this->render('guide/index.html.twig', array(
             'citiesJson' => $citiesJson,
+        ));
+    }
+
+    public function coolPlaces(): Response
+    {
+        return $this->render('guide/cool_places.html.twig', array(
+            'coolPlacesJson' => $this->encodeJson($this->getCoolPlacesData()),
         ));
     }
 
@@ -83,6 +87,203 @@ class GuideController extends AbstractController
         $value = preg_replace('/[^a-z0-9]+/', '-', $value);
 
         return trim($value, '-');
+    }
+
+    private function encodeJson(array $data): string
+    {
+        $json = json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+
+        return $json === false ? '{}' : $json;
+    }
+
+    private function getCoolPlacesData(): array
+    {
+        $duisburg = $this->findCity('duisburg');
+        if (!$duisburg) {
+            $duisburg = array(
+                'displayName' => 'Duisburg',
+                'region' => 'Industriekultur am Rhein',
+                'accent' => '#475569',
+                'summary' => 'Hafen, Stahlarchitektur, Rheinwege und raues Ruhrgebietsgefühl.',
+            );
+        }
+
+        return array(
+            'city' => array(
+                'slug' => 'duisburg',
+                'displayName' => $duisburg['displayName'],
+                'region' => $duisburg['region'],
+                'accent' => $duisburg['accent'],
+                'summary' => $duisburg['summary'],
+            ),
+            'places' => array(
+                array(
+                    'slug' => 'landschaftspark-duisburg-nord',
+                    'name' => 'Landschaftspark Duisburg-Nord',
+                    'type' => 'Industriekultur',
+                    'area' => 'Meiderich',
+                    'duration' => '2-3 Std.',
+                    'bestTime' => 'Später Nachmittag bis Abend',
+                    'address' => 'Emscherstraße 71, 47137 Duisburg',
+                    'intro' => 'Ein stillgelegtes Hüttenwerk, das heute als Park, Aussichtsort, Kletter- und Lichtkulisse funktioniert.',
+                    'why' => 'Der Ort zeigt Duisburgs Wandel sehr direkt: alte Hochöfen, grüne Wege, Wasserflächen und abends farbiges Licht.',
+                    'tip' => 'Plane genug Zeit ein und bleib bis zur Dämmerung, wenn die Lichtinstallation den Park stark verändert.',
+                    'facts' => array(
+                        array('label' => 'Kategorie', 'value' => 'Industriekultur'),
+                        array('label' => 'Ideal für', 'value' => 'Fotos, Spaziergang, Abendlicht'),
+                        array('label' => 'Zeit', 'value' => '2-3 Std.'),
+                        array('label' => 'Mood', 'value' => 'Rau, weit, filmisch'),
+                    ),
+                    'photos' => array(
+                        array('visual' => 'industrial', 'label' => 'Hochofen', 'caption' => 'Stahlstrukturen und weite Wege durch das alte Werk.'),
+                        array('visual' => 'industrial-light', 'label' => 'Licht', 'caption' => 'Abends wirkt der Park wie eine offene Bühne.'),
+                        array('visual' => 'industrial-water', 'label' => 'Wasserpark', 'caption' => 'Natur und Industrie liegen hier direkt nebeneinander.'),
+                        array('visual' => 'industrial-view', 'label' => 'Aussicht', 'caption' => 'Von oben liest du das Ruhrgebiet als Landschaft.'),
+                    ),
+                    'feedbacks' => array(
+                        array('name' => 'Mara', 'quote' => 'Bei Lichtwechsel wird der Park richtig stark. Man bleibt automatisch länger.'),
+                        array('name' => 'Toni', 'quote' => 'Mein Lieblingsort in Duisburg für Fotos und einen ruhigen Abendspaziergang.'),
+                    ),
+                ),
+                array(
+                    'slug' => 'tiger-and-turtle',
+                    'name' => 'Tiger & Turtle',
+                    'type' => 'Landmarke',
+                    'area' => 'Angerhausen',
+                    'duration' => '45-60 Min.',
+                    'bestTime' => 'Dämmerung',
+                    'address' => 'Ehinger Straße, 47249 Duisburg',
+                    'intro' => 'Eine begehbare Achterbahn-Skulptur auf einer Halde mit weitem Blick über Duisburg, Rhein und Ruhrgebiet.',
+                    'why' => 'Der Ort ist kurz, ikonisch und sehr fotografisch. Besonders abends zeichnen Lichter die Stahlkurven in den Himmel.',
+                    'tip' => 'Festes Schuhwerk mitnehmen und bei Wind oder schlechtem Wetter vorher prüfen, ob der Zugang möglich ist.',
+                    'facts' => array(
+                        array('label' => 'Kategorie', 'value' => 'Aussicht & Kunst'),
+                        array('label' => 'Ideal für', 'value' => 'Sonnenuntergang, Fotos'),
+                        array('label' => 'Zeit', 'value' => '45-60 Min.'),
+                        array('label' => 'Mood', 'value' => 'Skulptural, luftig'),
+                    ),
+                    'photos' => array(
+                        array('visual' => 'tiger', 'label' => 'Skulptur', 'caption' => 'Die geschwungene Stahlform ist das Motiv.'),
+                        array('visual' => 'tiger-dusk', 'label' => 'Dämmerung', 'caption' => 'Kurz vor dunkel wirkt der Ort am stärksten.'),
+                        array('visual' => 'tiger-view', 'label' => 'Panorama', 'caption' => 'Der Blick reicht über Industrie, Rhein und Stadt.'),
+                        array('visual' => 'tiger-lines', 'label' => 'Linien', 'caption' => 'Treppen, Kurven und Stahl ergeben klare Fotos.'),
+                    ),
+                    'feedbacks' => array(
+                        array('name' => 'Jonas', 'quote' => 'Kurz, aber bleibt hängen. Bei Abendlicht sieht alles viel größer aus.'),
+                        array('name' => 'Nora', 'quote' => 'Perfekter Spot, wenn man Duisburg von oben sehen will.'),
+                    ),
+                ),
+                array(
+                    'slug' => 'duisburger-innenhafen',
+                    'name' => 'Duisburger Innenhafen',
+                    'type' => 'Wasser & Architektur',
+                    'area' => 'Zentrum',
+                    'duration' => '90 Min.',
+                    'bestTime' => 'Nachmittag bis Abend',
+                    'address' => 'Innenhafen, 47051 Duisburg',
+                    'intro' => 'Marina, Speicherarchitektur, Restaurants und Museen machen den Innenhafen zum einfachsten Einstieg in Duisburg.',
+                    'why' => 'Hier ist Duisburg weicher und urbaner: Wasser, Backstein, neue Architektur und kurze Wege passen gut zusammen.',
+                    'tip' => 'Mit dem Museum Küppersmühle kombinieren und danach am Wasser sitzen bleiben.',
+                    'facts' => array(
+                        array('label' => 'Kategorie', 'value' => 'Hafen & Essen'),
+                        array('label' => 'Ideal für', 'value' => 'Ankommen, Spaziergang'),
+                        array('label' => 'Zeit', 'value' => '90 Min.'),
+                        array('label' => 'Mood', 'value' => 'Urban, ruhig'),
+                    ),
+                    'photos' => array(
+                        array('visual' => 'harbor', 'label' => 'Marina', 'caption' => 'Wasser und Architektur im Zentrum.'),
+                        array('visual' => 'harbor-brick', 'label' => 'Speicher', 'caption' => 'Alte Speicher geben dem Hafen Charakter.'),
+                        array('visual' => 'harbor-night', 'label' => 'Abend', 'caption' => 'Restaurants und Licht am Wasser.'),
+                        array('visual' => 'harbor-walk', 'label' => 'Promenade', 'caption' => 'Kurze Wege entlang der Hafenkante.'),
+                    ),
+                    'feedbacks' => array(
+                        array('name' => 'Sofia', 'quote' => 'Innenhafen fühlt sich entspannt an und ist ein guter Startpunkt.'),
+                        array('name' => 'Luca', 'quote' => 'Erst Kunst, dann Wasserblick. Genau mein Duisburg-Einstieg.'),
+                    ),
+                ),
+                array(
+                    'slug' => 'mkm-museum-kueppersmuehle',
+                    'name' => 'MKM Museum Küppersmühle',
+                    'type' => 'Kunst',
+                    'area' => 'Innenhafen',
+                    'duration' => '2 Std.',
+                    'bestTime' => 'Schlechtwetter oder ruhiger Nachmittag',
+                    'address' => 'Philosophenweg 55, 47051 Duisburg',
+                    'intro' => 'Moderne Kunst in einer ehemaligen Mühle, stark geprägt von Industriebau, White Cube und klarer Architektur.',
+                    'why' => 'Das Museum macht den Wandel des Innenhafens sichtbar und ist auch architektonisch ein Highlight.',
+                    'tip' => 'Vorher Öffnungszeiten prüfen und den Besuch mit einem Spaziergang am Innenhafen verbinden.',
+                    'facts' => array(
+                        array('label' => 'Kategorie', 'value' => 'Museum'),
+                        array('label' => 'Ideal für', 'value' => 'Kunst, Architektur'),
+                        array('label' => 'Zeit', 'value' => '2 Std.'),
+                        array('label' => 'Mood', 'value' => 'Klar, kulturell'),
+                    ),
+                    'photos' => array(
+                        array('visual' => 'museum', 'label' => 'Fassade', 'caption' => 'Industriebau trifft moderne Museumsarchitektur.'),
+                        array('visual' => 'museum-stairs', 'label' => 'Treppen', 'caption' => 'Klare Linien und starke Innenräume.'),
+                        array('visual' => 'museum-gallery', 'label' => 'Galerie', 'caption' => 'Ruhige Räume für moderne Kunst.'),
+                        array('visual' => 'museum-harbor', 'label' => 'Hafen', 'caption' => 'Das Museum liegt direkt am Innenhafen.'),
+                    ),
+                    'feedbacks' => array(
+                        array('name' => 'Elena', 'quote' => 'Das Gebäude allein lohnt sich schon, die Sammlung macht es rund.'),
+                    ),
+                ),
+                array(
+                    'slug' => 'sechs-seen-platte',
+                    'name' => 'Sechs-Seen-Platte',
+                    'type' => 'Natur',
+                    'area' => 'Duisburg-Süd',
+                    'duration' => 'Halber Tag',
+                    'bestTime' => 'Sommer, Vormittag',
+                    'address' => 'Duisburg-Wedau / Buchholz',
+                    'intro' => 'Seen, Spazierwege, Wasserflächen und Aussichtsturm bilden den entspannten Gegenpol zur Industriekultur.',
+                    'why' => 'Die Sechs-Seen-Platte zeigt, dass Duisburg nicht nur Stahl und Hafen ist, sondern auch viel Grün und Wasser hat.',
+                    'tip' => 'Für Picknick oder längere Pause einplanen, besonders wenn du einen langsameren Reisetag willst.',
+                    'facts' => array(
+                        array('label' => 'Kategorie', 'value' => 'Natur & Wasser'),
+                        array('label' => 'Ideal für', 'value' => 'Picknick, Spaziergang'),
+                        array('label' => 'Zeit', 'value' => 'Halber Tag'),
+                        array('label' => 'Mood', 'value' => 'Grün, leicht'),
+                    ),
+                    'photos' => array(
+                        array('visual' => 'lake', 'label' => 'Seeufer', 'caption' => 'Viel Wasser und lange Wege.'),
+                        array('visual' => 'lake-summer', 'label' => 'Sommer', 'caption' => 'Ideal für einen warmen Reisetag.'),
+                        array('visual' => 'lake-path', 'label' => 'Wege', 'caption' => 'Spaziergänge zwischen den Seen.'),
+                        array('visual' => 'lake-view', 'label' => 'Aussicht', 'caption' => 'Vom Turm sieht Duisburg überraschend grün aus.'),
+                    ),
+                    'feedbacks' => array(
+                        array('name' => 'Amir', 'quote' => 'Schöner Wechsel nach Hafen und Industrie. Ruhiger als erwartet.'),
+                    ),
+                ),
+                array(
+                    'slug' => 'lehmbruck-museum-kantpark',
+                    'name' => 'Lehmbruck Museum & Kantpark',
+                    'type' => 'Skulptur',
+                    'area' => 'Dellviertel',
+                    'duration' => '90 Min.',
+                    'bestTime' => 'Mittag oder ruhiger Nachmittag',
+                    'address' => 'Friedrich-Wilhelm-Straße 40, 47051 Duisburg',
+                    'intro' => 'Ein Museum für moderne Skulptur mit klarer Architektur und Skulpturenpark direkt im Kantpark.',
+                    'why' => 'Der Ort verbindet Kunst, Ruhe und Stadtmitte. Gut, wenn der Trip nicht nur draußen stattfinden soll.',
+                    'tip' => 'Erst Museum, danach eine kleine Runde durch den frei zugänglichen Skulpturenpark.',
+                    'facts' => array(
+                        array('label' => 'Kategorie', 'value' => 'Kunst & Park'),
+                        array('label' => 'Ideal für', 'value' => 'Skulptur, Pause'),
+                        array('label' => 'Zeit', 'value' => '90 Min.'),
+                        array('label' => 'Mood', 'value' => 'Ruhig, konzentriert'),
+                    ),
+                    'photos' => array(
+                        array('visual' => 'art', 'label' => 'Museum', 'caption' => 'Moderne Skulptur in klaren Räumen.'),
+                        array('visual' => 'art-park', 'label' => 'Kantpark', 'caption' => 'Kunst geht hier nach draußen weiter.'),
+                        array('visual' => 'art-glass', 'label' => 'Architektur', 'caption' => 'Glas, Beton und ruhige Linien.'),
+                        array('visual' => 'art-detail', 'label' => 'Details', 'caption' => 'Ein guter Ort zum genauen Hinschauen.'),
+                    ),
+                    'feedbacks' => array(
+                        array('name' => 'Mila', 'quote' => 'Sehr ruhig und genau richtig zwischen zwei größeren Outdoor-Spots.'),
+                    ),
+                ),
+            ),
+        );
     }
 
     private function getCities(): array
