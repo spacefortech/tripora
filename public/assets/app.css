@@ -16,6 +16,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 104px;
 }
 
 body {
@@ -56,12 +57,14 @@ input {
 }
 
 .site-header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 20;
+    z-index: 100;
     color: #fff;
+    background: linear-gradient(180deg, rgba(7, 8, 62, 0.58), rgba(7, 8, 62, 0.18) 72%, rgba(7, 8, 62, 0));
+    backdrop-filter: blur(12px);
 }
 
 .nav-inner {
@@ -699,7 +702,7 @@ h1 {
 }
 
 .results-shell {
-    width: min(1440px, 100%);
+    width: min(1180px, 100%);
     margin: 0 auto;
     padding: 6px 0 0;
 }
@@ -1466,6 +1469,15 @@ h1 {
 
     .nav-inner {
         gap: 16px;
+    }
+
+    .feed-shell {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .results-shell {
+        width: 100%;
     }
 
     .nav-action {
