@@ -2787,6 +2787,7 @@ body.is-city-search-open .home-page .home-hero {
 }
 
 .home-page .city-strip {
+    --city-pill-width: 240px;
     gap: 8px;
     margin-bottom: 26px;
 }
@@ -2796,6 +2797,8 @@ body.is-city-search-open .home-page .home-hero {
     align-items: center;
     gap: 8px;
     min-height: 38px;
+    width: var(--city-pill-width);
+    flex: 0 0 var(--city-pill-width);
     min-width: 0;
     padding: 0 14px;
     background: #fff;
@@ -3183,6 +3186,10 @@ body.is-city-search-open .home-page .home-hero {
         height: 52px;
         margin-top: 0;
         color: var(--navy);
+    }
+
+    .home-page .city-strip {
+        --city-pill-width: min(100%, 420px);
     }
 
     .home-assurance {
