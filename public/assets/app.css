@@ -2636,7 +2636,7 @@ body.is-city-search-open .home-page .home-hero {
 .home-assurance {
     position: relative;
     z-index: 3;
-    margin-top: -42px;
+    margin-top: 24px;
     padding: 0 16px 36px;
 }
 
@@ -3185,7 +3185,7 @@ body.is-city-search-open .home-page .home-hero {
     }
 
     .home-assurance {
-        margin-top: -28px;
+        margin-top: 18px;
         padding-bottom: 28px;
     }
 
