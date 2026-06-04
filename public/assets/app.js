@@ -166,10 +166,16 @@
 
     function renderCityStrip() {
         cityStrip.innerHTML = cities.map(function (city) {
+            var position = getSpritePosition(city, 0);
+            var spotsCount = Array.isArray(city.spots) ? city.spots.length : (typeof city.spotsCount === 'number' ? city.spotsCount : null);
+            var meta = [city.region, spotsCount !== null ? (spotsCount + ' Spots') : null].filter(Boolean).join(' · ');
+
             return '<button class="city-card" data-city-card data-city-slug="' + escapeHtml(city.slug) + '" type="button">' +
-                '<span class="city-card-pin" aria-hidden="true"></span>' +
-                '<strong>' + escapeHtml(city.displayName) + '</strong>' +
-                '<span>' + escapeHtml(city.region) + '</span>' +
+                '<span class="city-tile-media" aria-hidden="true" style="--sprite-x: ' + position.x + '%; --sprite-y: ' + position.y + '%; --city-accent: ' + escapeHtml(city.accent || '#ff7a1a') + ';"></span>' +
+                '<span class="city-tile-content">' +
+                    '<strong>' + escapeHtml(city.displayName) + '</strong>' +
+                    '<span class="city-tile-meta">' + escapeHtml(meta) + '</span>' +
+                '</span>' +
             '</button>';
         }).join('');
 
