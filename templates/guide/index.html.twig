@@ -83,52 +83,166 @@
                 </section>
             </section>
 
-            <section class="inspiration-section" id="inspire" aria-labelledby="inspire-title">
+            <section class="reviews-section" id="inspire" aria-labelledby="reviews-title">
                 <div class="section-heading">
-                    <h2 id="inspire-title">Lass dich inspirieren</h2>
-                    <p>Ideen für Reisen, die direkt nach einem Plan klingen.</p>
+                    <h2 id="reviews-title">Das sagen Reisende</h2>
+                    <p>Echte Stimmen, echte Ideen – wisch dich durch die Highlights.</p>
                 </div>
-                <div class="inspiration-grid">
-                    <a class="inspiration-card is-water" href="?city=hamburg">
-                        <span>6 Erlebnisse</span>
-                        <strong>Die besten Städte für Wasser, Hafen und Abendlicht</strong>
-                    </a>
-                    <a class="inspiration-card is-culture" href="?city=berlin">
-                        <span>8 Erlebnisse</span>
-                        <strong>Kunst, Design und kreative Viertel in Deutschland</strong>
-                    </a>
-                    <a class="inspiration-card is-weekend" href="/cool-places?city=duisburg">
-                        <span>5 Orte</span>
-                        <strong>Cool Places für ein Wochenende abseits der Klassiker</strong>
-                    </a>
-                </div>
-            </section>
 
-            <section class="nearby-section" id="nearby" aria-labelledby="nearby-title">
-                <div class="section-heading">
-                    <h2 id="nearby-title">Das findet jetzt in deiner Nähe statt</h2>
-                    <p>Schnelle Ideen für kurze Wege, Museen, Wasser und urbane Pausen.</p>
-                </div>
-                <div class="nearby-grid">
-                    <a class="nearby-card" href="?city=cologne">
-                        <strong>Köln</strong>
-                        <span>Dom, Rhein und Popkultur</span>
-                    </a>
-                    <a class="nearby-card" href="?city=duisburg">
-                        <strong>Duisburg</strong>
-                        <span>Industriekultur und Innenhafen</span>
-                    </a>
-                    <a class="nearby-card" href="?city=duesseldorf">
-                        <strong>Düsseldorf</strong>
-                        <span>Kunst, Rhein und japanisches Viertel</span>
-                    </a>
+                <div class="reviews-shell" aria-label="Rezensionen (horizontal scroll)">
+                    <button class="reviews-nav is-prev" type="button" data-reviews-prev aria-label="Vorherige Rezensionen">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+
+                    <div class="reviews-carousel" data-reviews-carousel tabindex="0" role="list">
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">M</span>
+                                <div class="review-meta">
+                                    <strong>Mara</strong>
+                                    <span>Berlin · 5,0/5</span>
+                                </div>
+                            </div>
+                            <p>„Super schnell eine Route gefunden. Die Tipps waren konkret und nicht dieses generische ‚Top 10‘-Zeug.“</p>
+                        </article>
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">L</span>
+                                <div class="review-meta">
+                                    <strong>Luca</strong>
+                                    <span>Köln · 4,8/5</span>
+                                </div>
+                            </div>
+                            <p>„Ich hab direkt Spots gespeichert und am Wochenende abgeklappert. Genau die Mischung aus ‚nice‘ und machbar.“</p>
+                        </article>
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">S</span>
+                                <div class="review-meta">
+                                    <strong>Sofia</strong>
+                                    <span>Hamburg · 4,9/5</span>
+                                </div>
+                            </div>
+                            <p>„Die Beschreibungen treffen den Vibe. Hat uns geholfen, ohne Stress einen schönen Tag zu planen.“</p>
+                        </article>
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">T</span>
+                                <div class="review-meta">
+                                    <strong>Toni</strong>
+                                    <span>München · 4,7/5</span>
+                                </div>
+                            </div>
+                            <p>„Gute Auswahl, schöne Fotos, klare Infos. Vor allem die kurzen ‚warum lohnt es sich‘-Sätze sind gold.“</p>
+                        </article>
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">N</span>
+                                <div class="review-meta">
+                                    <strong>Nora</strong>
+                                    <span>Leipzig · 5,0/5</span>
+                                </div>
+                            </div>
+                            <p>„Wir wollten spontan los – hier war nach 3 Minuten klar, wohin. Genau mein Tool für Kurztrips.“</p>
+                        </article>
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">J</span>
+                                <div class="review-meta">
+                                    <strong>Jonas</strong>
+                                    <span>Düsseldorf · 4,8/5</span>
+                                </div>
+                            </div>
+                            <p>„Die Empfehlungen fühlen sich kuratiert an. Kein Overload, sondern ‚genug, um zu starten‘.“</p>
+                        </article>
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">A</span>
+                                <div class="review-meta">
+                                    <strong>Alina</strong>
+                                    <span>Frankfurt · 4,9/5</span>
+                                </div>
+                            </div>
+                            <p>„Mega für Ideen nach Feierabend: ein Spot, ein Kaffee, fertig. Genau das, was mir oft fehlt.“</p>
+                        </article>
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">B</span>
+                                <div class="review-meta">
+                                    <strong>Ben</strong>
+                                    <span>Stuttgart · 4,7/5</span>
+                                </div>
+                            </div>
+                            <p>„Schönes Layout, schnelle Orientierung. Ich mag, dass man sofort sieht, was sich wirklich lohnt.“</p>
+                        </article>
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">E</span>
+                                <div class="review-meta">
+                                    <strong>Elena</strong>
+                                    <span>Bremen · 5,0/5</span>
+                                </div>
+                            </div>
+                            <p>„Wir haben zwei Vorschläge kombiniert und hatten einen perfekten Tag – ohne endlos zu googeln.“</p>
+                        </article>
+                        <article class="review-card" role="listitem">
+                            <div class="review-top">
+                                <span class="review-avatar" aria-hidden="true">P</span>
+                                <div class="review-meta">
+                                    <strong>Paolo</strong>
+                                    <span>Nürnberg · 4,8/5</span>
+                                </div>
+                            </div>
+                            <p>„Die Tipps sind echt praktisch. Man merkt, dass hier jemand kuratiert statt einfach zu sammeln.“</p>
+                        </article>
+                    </div>
+
+                    <button class="reviews-nav is-next" type="button" data-reviews-next aria-label="Nächste Rezensionen">
+                        <span aria-hidden="true">›</span>
+                    </button>
                 </div>
             </section>
         </main>
 
-        <footer class="site-footer" id="weekend">
-            <span>Tripora</span>
-            <span>Kuratierte City Guides und Wochenendrouten, bereit für neue Länder.</span>
+        <footer class="site-footer" aria-label="Footer">
+            <div class="footer-inner">
+                <div class="footer-columns" aria-label="Footer Links">
+                    <div class="footer-col">
+                        <h3 class="footer-title">Unternehmen</h3>
+                        <a class="footer-link" href="#">Über uns</a>
+                        <a class="footer-link" href="#support">Kontakt</a>
+                        <a class="footer-link" href="#">Kooperation</a>
+                        <a class="footer-link" href="#">Presse</a>
+                        <a class="footer-link" href="#">Karriere</a>
+                    </div>
+                    <div class="footer-col">
+                        <h3 class="footer-title">Info</h3>
+                        <a class="footer-link" href="#cities">Übersicht City Guides</a>
+                        <a class="footer-link" href="#places">Reisethemen</a>
+                        <a class="footer-link" href="#">Schlagworte</a>
+                        <a class="footer-link" href="#">Fakten</a>
+                        <a class="footer-link" href="#">FAQ</a>
+                    </div>
+                    <div class="footer-col">
+                        <h3 class="footer-title">Länder</h3>
+                        <a class="footer-link" href="#"><span aria-hidden="true">🇩🇪</span> tripora.de</a>
+                        <a class="footer-link" href="#"><span aria-hidden="true">🇦🇹</span> tripora.at</a>
+                    </div>
+                </div>
+
+                <div class="footer-bottom" aria-label="Rechtliches">
+                    <nav class="footer-legal" aria-label="Links">
+                        <a class="footer-legal-link" href="#">Cookies</a>
+                        <span class="footer-sep" aria-hidden="true">|</span>
+                        <a class="footer-legal-link" href="#">Datenschutz</a>
+                        <span class="footer-sep" aria-hidden="true">|</span>
+                        <a class="footer-legal-link" href="#">Impressum</a>
+                        <span class="footer-sep" aria-hidden="true">|</span>
+                        <a class="footer-legal-link" href="#">Barrierefreiheit</a>
+                    </nav>
+                    <div class="footer-copy">© 2013 - 2026 Tripora · City Guides &amp; Kurztrip-Ideen</div>
+                </div>
+            </div>
         </footer>
     </div>
 

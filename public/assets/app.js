@@ -377,6 +377,34 @@
         });
     }
 
+    function bindReviewsCarousel() {
+        var carousel = document.querySelector('[data-reviews-carousel]');
+        var prev = document.querySelector('[data-reviews-prev]');
+        var next = document.querySelector('[data-reviews-next]');
+
+        if (!carousel || !prev || !next) {
+            return;
+        }
+
+        function getStep() {
+            var card = carousel.querySelector('.review-card');
+            if (!card) {
+                return 320;
+            }
+            var styles = window.getComputedStyle(carousel);
+            var gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+            return card.getBoundingClientRect().width + gap;
+        }
+
+        prev.addEventListener('click', function () {
+            carousel.scrollBy({ left: -getStep(), behavior: 'smooth' });
+        });
+
+        next.addEventListener('click', function () {
+            carousel.scrollBy({ left: getStep(), behavior: 'smooth' });
+        });
+    }
+
     function initialize() {
         if (!cities.length) {
             return;
@@ -385,6 +413,7 @@
         renderOptions('');
         renderCityStrip();
         bindCategoryFilters();
+        bindReviewsCarousel();
 
         var params = new URLSearchParams(window.location.search);
         var initialCity = findCity(params.get('city'));
