@@ -3872,12 +3872,12 @@ body.is-city-search-open .home-page .home-hero {
 .reviews-carousel {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(380px, 1fr);
+    grid-auto-columns: minmax(360px, 1fr);
     gap: 18px;
     overflow-x: auto;
-    padding: 8px 2px 14px;
+    padding: 10px 2px 12px;
     scroll-snap-type: x mandatory;
-    scroll-padding: 10px;
+    scroll-padding: 12px;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
 }
@@ -3887,17 +3887,27 @@ body.is-city-search-open .home-page .home-hero {
 }
 
 .review-card {
+    position: relative;
     scroll-snap-align: start;
     display: grid;
     gap: 14px;
     padding: 18px 18px 20px;
     border-radius: 14px;
-    background:
-        linear-gradient(180deg, rgba(14, 139, 232, 0.06), rgba(255, 255, 255, 0)),
-        #fff;
-    border: 1px solid rgba(223, 227, 239, 0.95);
-    box-shadow: 0 18px 44px rgba(7, 8, 62, 0.08);
+    background: #fff;
+    border: 1px solid rgba(223, 227, 239, 0.92);
+    box-shadow: 0 18px 42px rgba(7, 8, 62, 0.06);
     min-height: 204px;
+}
+
+.review-card:before {
+    content: "“";
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    font-size: 2.2rem;
+    line-height: 1;
+    font-weight: 900;
+    color: rgba(14, 139, 232, 0.18);
 }
 
 .review-top {
@@ -3938,9 +3948,33 @@ body.is-city-search-open .home-page .home-hero {
 .review-card p {
     margin: 0;
     color: rgba(7, 3, 79, 0.82);
-    font-size: 1.06rem;
+    font-size: 1.02rem;
     font-weight: 500;
     line-height: 1.55;
+}
+
+.reviews-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.reviews-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(79, 91, 134, 0.25);
+    cursor: pointer;
+    transition: width 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.reviews-dot.is-active {
+    width: 22px;
+    background: color-mix(in srgb, var(--blue) 55%, var(--navy));
 }
 
 .reviews-nav {
@@ -4276,6 +4310,10 @@ body.is-city-search-open .home-page .home-hero {
     .reviews-shell:before,
     .reviews-shell:after {
         display: none;
+    }
+
+    .reviews-dots {
+        margin-top: 12px;
     }
 
     .assurance-card {
