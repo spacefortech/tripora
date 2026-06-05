@@ -2725,6 +2725,15 @@ body.is-city-search-open .home-page .home-hero {
     pointer-events: none;
 }
 
+.spot-card.has-photo .cool-place-photo {
+    background-image: url("/assets/city-card-sprite-16.png");
+    background-position: var(--sprite-x) var(--sprite-y);
+    /* Zoom in a bit to hide the white grid lines in the sprite */
+    background-size: 410% 410%;
+    background-repeat: no-repeat;
+    background-color: #0b0c3f;
+}
+
 .pagination {
     display: flex;
     align-items: center;

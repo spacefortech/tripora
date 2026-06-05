@@ -48,17 +48,11 @@
 
                 <section class="cool-place-grid spot-grid" aria-label="Spots">
                     {% for item in items %}
-                        <article class="cool-place-card spot-card {{ page == 1 ? '' : 'is-placeholder' }}" style="--city-accent: {{ item.city.accent }};">
-                            <div
-                                class="cool-place-photo"
-                                {% if page == 1 %}
-                                    style="background-image: url('/assets/city-card-sprite-16.png'); background-position: {{ item.city.spriteX }}% {{ item.city.spriteY }}%; background-size: 400% 400%;"
-                                {% endif %}
-                            >
-                                {% if page == 1 %}
-                                    <span class="spot-photo-shade" aria-hidden="true"></span>
-                                {% endif %}
-                                <span class="spot-city-pill">{{ item.city.displayName }}</span>
+                        <article
+                            class="cool-place-card spot-card {{ page == 1 ? 'has-photo' : 'is-placeholder' }}"
+                            style="--city-accent: {{ item.city.accent }}; --sprite-x: {{ item.city.spriteX|default(0) }}%; --sprite-y: {{ item.city.spriteY|default(0) }}%;" >
+                            <div class="cool-place-photo">
+                            <span class="spot-city-pill">{{ item.city.displayName }}</span>
                             </div>
                             <div class="cool-place-card-body">
                                 <div class="cool-place-meta">
