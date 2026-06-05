@@ -75,10 +75,7 @@
             </div>
         </main>
 
-        <footer class="site-footer">
-            <span>Tripora</span>
-            <span>Cool Places in Duisburg, bereit für echte Daten aus dem DB.</span>
-        </footer>
+        {% include 'partials/_footer.html.twig' %}
     </div>
 
     <script>window.COOL_PLACES_DATA = {{ coolPlacesJson|raw }};</script>

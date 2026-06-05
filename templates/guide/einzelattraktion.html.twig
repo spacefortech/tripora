@@ -48,8 +48,16 @@
 
                 <section class="cool-place-grid spot-grid" aria-label="Spots">
                     {% for item in items %}
-                        <article class="cool-place-card is-placeholder spot-card" style="--city-accent: {{ item.city.accent }};">
-                            <div class="cool-place-photo">
+                        <article class="cool-place-card spot-card {{ page == 1 ? '' : 'is-placeholder' }}" style="--city-accent: {{ item.city.accent }};">
+                            <div
+                                class="cool-place-photo"
+                                {% if page == 1 %}
+                                    style="background-image: url('/assets/city-card-sprite-16.png'); background-position: {{ item.city.spriteX }}% {{ item.city.spriteY }}%; background-size: 400% 400%;"
+                                {% endif %}
+                            >
+                                {% if page == 1 %}
+                                    <span class="spot-photo-shade" aria-hidden="true"></span>
+                                {% endif %}
                                 <span class="spot-city-pill">{{ item.city.displayName }}</span>
                             </div>
                             <div class="cool-place-card-body">
@@ -86,9 +94,6 @@
             </section>
         </main>
 
-        <footer class="site-footer">
-            <span>Tripora</span>
-            <span>Einzelattraktionen – alle Spots aus allen Städten.</span>
-        </footer>
+        {% include 'partials/_footer.html.twig' %}
     </div>
 {% endblock %}

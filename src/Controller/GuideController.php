@@ -53,6 +53,11 @@ class GuideController extends AbstractController
 
         foreach ($this->getCities() as $city) {
             $spots = isset($city['spots']) && is_array($city['spots']) ? $city['spots'] : array();
+            $imageIndex = isset($city['imageIndex']) && is_numeric($city['imageIndex']) ? (int) $city['imageIndex'] : 0;
+            $column = $imageIndex % 4;
+            $row = (int) floor($imageIndex / 4);
+            $spriteX = $column === 3 ? 100 : $column * 33.3333;
+            $spriteY = $row === 3 ? 100 : $row * 33.3333;
 
             foreach ($spots as $index => $spot) {
                 $items[] = array(
@@ -63,6 +68,8 @@ class GuideController extends AbstractController
                         'displayName' => $city['displayName'],
                         'region' => $city['region'] ?? '',
                         'accent' => $city['accent'] ?? '#0b0c3f',
+                        'spriteX' => $spriteX,
+                        'spriteY' => $spriteY,
                     ),
                     'spot' => array(
                         'type' => $spot['type'] ?? '',
@@ -94,7 +101,11 @@ class GuideController extends AbstractController
 
     public function highlightsPaket(): Response
     {
-        return $this->render('guide/highlights_paket.html.twig');
+        $citiesJson = $this->encodeJson(array_values($this->getCities()));
+
+        return $this->render('guide/highlights_paket.html.twig', array(
+            'citiesJson' => $citiesJson,
+        ));
     }
 
     private function findCity(string $slug): ?array
