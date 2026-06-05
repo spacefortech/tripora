@@ -2643,7 +2643,7 @@ h1 {
 }
 
 body.is-city-search-open .home-page .home-hero {
-    z-index: 6;
+    z-index: 20;
 }
 
 .home-page .home-hero:after {
@@ -2817,7 +2817,7 @@ body.is-city-search-open .home-page .home-hero {
     box-shadow:
         0 28px 80px rgba(7, 8, 62, 0.22),
         0 10px 32px rgba(0, 0, 0, 0.12);
-    overflow: hidden;
+    overflow: visible;
 }
 
 .home-search-panel.is-compact {
@@ -2850,7 +2850,8 @@ body.is-city-search-open .home-page .home-hero {
     opacity: 0.9;
 }
 
-.home-search-panel > * {
+.home-search-panel > .search-panel-title,
+.home-search-panel > .search-fields {
     position: relative;
     z-index: 1;
 }
