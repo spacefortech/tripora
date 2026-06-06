@@ -12,8 +12,6 @@
     var categoryButtons = document.querySelectorAll('[data-category-filter]');
     var searchTabs = form ? form.querySelectorAll('[data-search-tab]') : [];
     var searchFieldLabel = form ? form.querySelector('[data-search-field-label]') : null;
-    var searchModeKicker = form ? form.querySelector('[data-search-mode-kicker]') : null;
-    var searchModeLabel = form ? form.querySelector('[data-search-mode-label]') : null;
     var activeSearchMode = form ? (form.getAttribute('data-search-mode') || 'spot') : 'spot';
     var activeOptionIndex = 0;
     var visibleOptions = [];
@@ -56,14 +54,6 @@
 
         if (searchFieldLabel) {
             searchFieldLabel.textContent = isCityMode ? 'Wohin?' : 'Attraktion';
-        }
-
-        if (searchModeKicker) {
-            searchModeKicker.textContent = isCityMode ? 'Guide' : 'Typ';
-        }
-
-        if (searchModeLabel) {
-            searchModeLabel.textContent = isCityMode ? 'City Guide' : 'Einzelattraktion';
         }
 
         input.name = isCityMode ? 'city' : 'q';
