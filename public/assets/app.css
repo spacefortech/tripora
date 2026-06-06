@@ -2955,12 +2955,11 @@ body.is-city-search-open .home-page .home-hero {
     border: 0;
     border-radius: 0 14px 14px 14px;
     background: #ffffff;
-    box-shadow: 0 34px 54px -30px rgba(5, 8, 38, 0.32);
-    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    box-shadow: none;
+    transition: none;
 }
 
 .home-search-panel .search-fields:focus-within {
-    box-shadow: 0 34px 54px -30px rgba(5, 8, 38, 0.32);
     transform: none;
 }
 
@@ -3034,13 +3033,13 @@ body.is-city-search-open .home-page .home-hero {
     position: relative;
     min-width: 118px;
     height: 44px;
-    padding: 0 38px 0 18px;
+    padding: 0 18px;
     border-radius: 999px;
     color: #fff;
     font-size: 0.92rem;
-    background: linear-gradient(135deg, #ff8a2a, #ff6b16);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
-    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    background: #ff7a1a;
+    box-shadow: none;
+    transition: background 160ms ease;
 }
 
 .home-search-panel .search-fields button span {
@@ -3049,40 +3048,19 @@ body.is-city-search-open .home-page .home-hero {
 }
 
 .home-search-panel .search-fields button:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 18px;
-    width: 11px;
-    height: 11px;
-    border: 2px solid currentColor;
-    border-radius: 50%;
-    transform: translateY(-57%);
+    content: none;
 }
 
 .home-search-panel .search-fields button:after {
-    content: "";
-    position: absolute;
-    top: calc(50% + 6px);
-    right: 13px;
-    width: 9px;
-    height: 2px;
-    border-radius: 999px;
-    background: currentColor;
-    transform: rotate(45deg);
-    transform-origin: left center;
+    content: none;
 }
 
 .home-search-panel .search-fields button:hover {
-    background: linear-gradient(135deg, #ff963f, #ff701a);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32);
-    transform: translateY(-1px);
+    background: #ff8a31;
 }
 
 .home-search-panel .search-fields button:active {
-    background: linear-gradient(135deg, #ff7a1a, #f45e0d);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
-    transform: translateY(0);
+    background: #ff7a1a;
 }
 
 .home-search-panel .search-fields button:focus-visible {
