@@ -4033,22 +4033,27 @@ body.is-city-search-open .home-page .home-hero {
 
 .home-newsletter {
     padding: 78px 16px 88px;
-    background: #f7f8fb;
+    background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 70%);
 }
 
 .home-newsletter-inner {
     display: grid;
-    grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1fr);
-    gap: 64px;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+    gap: 48px;
     align-items: center;
     width: min(1180px, calc(100% - 40px));
     margin: 0 auto;
+    padding: 48px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid rgba(223, 227, 239, 0.95);
+    box-shadow: 0 18px 44px rgba(7, 8, 62, 0.06);
 }
 
 .home-newsletter-copy h2 {
     margin: 0;
     color: var(--navy);
-    font-size: 2rem;
+    font-size: 2.2rem;
     line-height: 1.08;
 }
 
@@ -4059,8 +4064,8 @@ body.is-city-search-open .home-page .home-hero {
     margin-bottom: 14px;
     padding: 0 10px;
     border-radius: 999px;
-    background: #eef6f7;
-    color: var(--blue);
+    background: rgba(14, 139, 232, 0.1);
+    color: color-mix(in srgb, var(--blue) 75%, var(--navy));
     font-size: 0.72rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -4069,9 +4074,9 @@ body.is-city-search-open .home-page .home-hero {
 .home-newsletter-copy > p {
     max-width: 560px;
     margin: 22px 0 0;
-    color: var(--navy);
+    color: var(--muted);
     font-size: 1.02rem;
-    font-weight: 650;
+    font-weight: 750;
     line-height: 1.45;
 }
 
@@ -4086,9 +4091,11 @@ body.is-city-search-open .home-page .home-hero {
 }
 
 .newsletter-label {
-    color: var(--navy);
-    font-size: 0.82rem;
+    color: rgba(79, 91, 134, 0.78);
+    font-size: 0.72rem;
     font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .newsletter-row {
@@ -4100,20 +4107,22 @@ body.is-city-search-open .home-page .home-hero {
 
 .newsletter-row input {
     width: 100%;
-    min-height: 54px;
-    border: 1px solid rgba(7, 8, 62, 0.14);
-    border-radius: 999px;
+    min-height: 52px;
+    border: 1px solid rgba(223, 227, 239, 0.95);
+    border-radius: 14px;
     background: #fff;
     color: var(--navy);
     padding: 0 22px;
     font-size: 0.98rem;
     font-weight: 700;
     outline: 0;
-    box-shadow: inset 0 1px 0 rgba(7, 8, 62, 0.04);
+    box-shadow: none;
 }
 
 .newsletter-row input:focus {
-    border-color: rgba(7, 8, 62, 0.34);
+    border-color: rgba(14, 139, 232, 0.55);
+    outline: 3px solid rgba(14, 139, 232, 0.18);
+    outline-offset: 2px;
 }
 
 .newsletter-row input::placeholder {
@@ -4126,19 +4135,19 @@ body.is-city-search-open .home-page .home-hero {
     align-items: center;
     justify-content: center;
     min-width: 162px;
-    min-height: 54px;
+    min-height: 52px;
     border: 0;
-    border-radius: 999px;
-    background: var(--navy);
-    color: #fff;
+    border-radius: 14px;
+    background: #ff7a1a;
+    color: var(--navy);
     font-size: 0.96rem;
     font-weight: 900;
     cursor: pointer;
-    transition: transform 160ms ease, background 160ms ease;
+    transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }
 
 .newsletter-row button:hover {
-    background: #0d086b;
+    background: #ff8a31;
     transform: translateY(-1px);
 }
 
@@ -4149,14 +4158,14 @@ body.is-city-search-open .home-page .home-hero {
     align-items: start;
     max-width: 760px;
     color: var(--navy);
-    font-size: 0.82rem;
-    font-weight: 650;
+    font-size: 0.8rem;
+    font-weight: 700;
     line-height: 1.45;
 }
 
 .newsletter-consent input {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     margin: 0;
     border: 2px solid var(--navy);
     border-radius: 5px;
@@ -4173,10 +4182,10 @@ body.is-city-search-open .home-page .home-hero {
 
 .newsletter-note {
     max-width: 620px;
-    margin-top: 34px;
-    color: var(--navy);
+    margin-top: 18px;
+    color: var(--muted);
     font-size: 0.82rem;
-    font-weight: 650;
+    font-weight: 700;
     line-height: 1.45;
 }
 
@@ -4184,22 +4193,16 @@ body.is-city-search-open .home-page .home-hero {
     position: relative;
     min-height: 360px;
     overflow: visible;
-    border-radius: 8px;
+    border-radius: 18px;
+    border: 1px solid rgba(223, 227, 239, 0.95);
     background:
-        linear-gradient(135deg, rgba(14, 139, 232, 0.12), rgba(255, 122, 26, 0.08)),
-        #f7fbff;
+        radial-gradient(circle at 20% 10%, rgba(14, 139, 232, 0.12), transparent 58%),
+        radial-gradient(circle at 80% 90%, rgba(255, 122, 26, 0.12), transparent 55%),
+        #ffffff;
 }
 
 .home-newsletter-media:before {
-    content: "";
-    position: absolute;
-    inset: 34px;
-    border: 1px solid rgba(7, 8, 62, 0.08);
-    border-radius: 8px;
-    background:
-        linear-gradient(90deg, rgba(7, 8, 62, 0.05) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(7, 8, 62, 0.05) 1px, transparent 1px);
-    background-size: 42px 42px;
+    content: none;
 }
 
 .newsletter-postcard {
@@ -4209,12 +4212,13 @@ body.is-city-search-open .home-page .home-hero {
     flex-direction: column;
     justify-content: flex-end;
     min-width: 0;
-    border-radius: 8px;
+    border-radius: 14px;
     padding: 16px;
     color: #fff;
     background-position: center;
     background-size: cover;
-    box-shadow: 0 22px 46px rgba(7, 8, 62, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 18px 44px rgba(7, 8, 62, 0.14);
 }
 
 .newsletter-postcard:before {
@@ -4444,6 +4448,7 @@ body.is-city-search-open .home-page .home-hero {
     .home-newsletter-inner {
         grid-template-columns: 1fr;
         gap: 34px;
+        padding: 34px;
     }
 
     .home-newsletter-media {
