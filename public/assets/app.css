@@ -2608,7 +2608,6 @@ h1 {
 }
 
 .home-page .nav-inner {
-    width: min(1240px, calc(100% - 48px));
     min-height: 78px;
     gap: 18px;
 }
@@ -3301,13 +3300,13 @@ body.is-city-search-open .home-page .home-hero {
 }
 
 .home-page .feed-shell {
-    padding: 38px 16px 82px;
+    padding: 38px 20px 82px;
     background:
         linear-gradient(180deg, #f7fbff 0%, #fff 42%, #f6f8fb 100%);
 }
 
 .home-page .section-heading.is-left {
-    width: min(1180px, calc(100% - 40px));
+    width: min(1180px, 100%);
     margin: 8px auto 22px;
     text-align: left;
 }
@@ -3328,7 +3327,7 @@ body.is-city-search-open .home-page .home-hero {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 16px;
-    width: min(1180px, calc(100% - 40px));
+    width: min(1180px, 100%);
     margin: 0 auto 56px;
     padding: 0;
     overflow: visible;
@@ -4412,6 +4411,11 @@ body.is-city-search-open .home-page .home-hero {
         width: min(100% - 28px, 1180px);
     }
 
+    .home-page .feed-shell {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
     .home-page .destinations-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -4561,7 +4565,7 @@ body.is-city-search-open .home-page .home-hero {
 
     .home-page .city-strip {
         grid-template-columns: 1fr;
-        width: min(1180px, calc(100% - 28px));
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
         padding-left: 0;
