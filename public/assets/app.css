@@ -4033,7 +4033,7 @@ body.is-city-search-open .home-page .home-hero {
 
 .home-newsletter {
     padding: 78px 16px 88px;
-    background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 70%);
+    background: #ffffff;
 }
 
 .home-newsletter-inner {
@@ -4043,11 +4043,12 @@ body.is-city-search-open .home-page .home-hero {
     align-items: center;
     width: min(1180px, calc(100% - 40px));
     margin: 0 auto;
-    padding: 48px;
-    border-radius: 20px;
-    background: #fff;
-    border: 1px solid rgba(223, 227, 239, 0.95);
-    box-shadow: 0 18px 44px rgba(7, 8, 62, 0.06);
+    /* full-width block (not a card) */
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
 }
 
 .home-newsletter-copy h2 {
@@ -4448,7 +4449,7 @@ body.is-city-search-open .home-page .home-hero {
     .home-newsletter-inner {
         grid-template-columns: 1fr;
         gap: 34px;
-        padding: 34px;
+        padding: 0;
     }
 
     .home-newsletter-media {
