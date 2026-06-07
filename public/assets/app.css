@@ -2635,8 +2635,8 @@ h1 {
     min-height: 780px;
     padding: 128px 16px 132px;
     background:
-        linear-gradient(180deg, rgba(7, 8, 40, 0.22) 0%, rgba(7, 8, 40, 0.44) 70%, rgba(7, 8, 40, 0.52) 100%),
-        linear-gradient(90deg, rgba(255, 122, 26, 0.18) 0%, rgba(255, 255, 255, 0.02) 56%, rgba(14, 139, 232, 0.12) 100%),
+        linear-gradient(180deg, rgba(7, 8, 40, 0.08) 0%, rgba(7, 8, 40, 0.2) 70%, rgba(7, 8, 40, 0.28) 100%),
+        linear-gradient(90deg, rgba(255, 122, 26, 0.14) 0%, rgba(255, 255, 255, 0.1) 56%, rgba(14, 139, 232, 0.16) 100%),
         url("/assets/header-brandenburger-tor.jpg") center 44% / cover no-repeat;
 }
 
