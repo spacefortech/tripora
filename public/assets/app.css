@@ -2912,6 +2912,7 @@ body.is-city-search-open .home-page .home-hero {
     padding: 22px 20px;
     position: relative;
     border: 1px solid var(--line);
+    border-top: 0;
     border-radius: 0 14px 14px 14px;
     background: #ffffff;
     box-shadow: none;
