@@ -2631,12 +2631,12 @@ h1 {
 }
 
 .home-page .home-hero {
-    min-height: 960px;
-    padding: 138px 16px 152px;
+    min-height: clamp(678px, 77vh, 788px);
+    padding: 176px 16px 102px;
     background:
         linear-gradient(180deg, rgba(7, 8, 40, 0.08) 0%, rgba(7, 8, 40, 0.2) 70%, rgba(7, 8, 40, 0.28) 100%),
         linear-gradient(90deg, rgba(255, 122, 26, 0.14) 0%, rgba(255, 255, 255, 0.1) 56%, rgba(14, 139, 232, 0.16) 100%),
-        url("/assets/header-brandenburger-tor.jpg") center 54% / cover no-repeat;
+        url("/assets/header-brandenburger-tor.jpg") center 52% / cover no-repeat;
 }
 
 body.is-city-search-open .home-page .home-hero {
@@ -4475,8 +4475,8 @@ body.is-city-search-open .home-page .home-hero {
     }
 
     .home-page .home-hero {
-        min-height: 980px;
-        padding: 114px 0 112px;
+        min-height: auto;
+        padding: 154px 0 82px;
     }
 
     .home-page .hero-content {
